@@ -2,24 +2,24 @@
 main: build-image build-container
 
 build-image:
-	docker build -t lista-de-la-compra .
+	docker build -t kata-de-nota .
 
 build-container:
-	docker run -dt --name lista-de-la-compra -v .:/540/Boilerplate lista-de-la-compra
-	docker exec lista-de-la-compra composer install
+	docker run -dt --name kata-de-nota -v .:/540/kata-de-nota kata-de-nota
+	docker exec kata-de-nota composer install
 
 start:
-	docker start lista-de-la-compra
+	docker start kata-de-nota
 
 test: start
-	docker exec lista-de-la-compra ./vendor/bin/phpunit tests/$(target)
+	docker exec kata-de-nota ./vendor/bin/phpunit tests/$(target)
 
 shell: start
-	docker exec -it lista-de-la-compra /bin/bash
+	docker exec -it kata-de-nota /bin/bash
 
 stop:
-	docker stop lista-de-la-compra
+	docker stop kata-de-nota
 
 clean: stop
-	docker rm lista-de-la-compra
+	docker rm kata-de-nota
 	rm -rf vendor
